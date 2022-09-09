@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMORY GAME</title>
+        <script src="code.js"></script>
+        <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 class="title">MEMORY GAME</h1>
+    <div class="form">
+        <!--Init the form in html-->
+        <form action="party.php" method="get">
+
+            <!--Title-->
+            <h1 class="ftitle">Configure the party</h1>
+
+            <!--Number of players-->
+            <div id="test">
+                <p id="ftext">Number of Players</p> 
+                <input type="range" id="rangeInput" name="nplayers" min="1" max="4" oninput="this.nextElementSibling.value = this.value">
+                <output for="nplayers" id="output">*</output>
+            </div>
+
+
+        <!--Get the size of a panel-->
+        <div class="panel">
+            <div id="test">
+                <p id="ftext">X</p> 
+                <input type="range" id="rangeInput" name="fx" min="1" max="6" oninput="this.nextElementSibling.value = this.value">
+                <output for="fx" id="output">*</output>
+            </div>
+            <div id="test">
+                <p id="ftext">Y</p>   
+                <input type="range" id="rangeInput" name="fy" min="1" max="4" oninput="this.nextElementSibling.value = this.value">
+                <output for="fy" id="output">*</output>
+            </div>
+        </div>
+        <!--Submit button-->
+            <input class="button" type="submit" value="PLAY">
+            <a class="button" href="rank.html">RANK</a>
+        </form> 
+    </div>
+</body>
+</html>
