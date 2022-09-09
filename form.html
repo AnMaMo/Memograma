@@ -20,21 +20,29 @@
             <!--Number of players-->
             <div id="test">
                 <p id="ftext">Number of Players</p> 
-                <input type="range" id="rangeInput" name="nplayers" min="1" max="4" oninput="this.nextElementSibling.value = this.value">
+                <input type="range" id="rangeInput" name="nplayers" min="1" max="4" oninput="this.nextElementSibling.value = this.value" required>
                 <output for="nplayers" id="output">*</output>
             </div>
 
+
+            <!-- Name of players -->
+            <p id="ftext">Nicks of Players</p> 
+            <input type="text" name="player1" id="textbox" placeholder="PLAYER">
+            <input type="text" name="player2" id="textbox" placeholder="PLAYER">
+            <input type="text" name="player3" id="textbox" placeholder="PLAYER">
+            <input type="text" name="player4" id="textbox" placeholder="PLAYER">
+            
 
         <!--Get the size of a panel-->
         <div class="panel">
             <div id="test">
                 <p id="ftext">X</p> 
-                <input type="range" id="rangeInput" name="fx" min="1" max="6" oninput="this.nextElementSibling.value = this.value">
+                <input type="range" id="rangeInput" name="fx" min="1" max="6" oninput="this.nextElementSibling.value = this.value" required>
                 <output for="fx" id="output">*</output>
             </div>
             <div id="test">
                 <p id="ftext">Y</p>   
-                <input type="range" id="rangeInput" name="fy" min="1" max="4" oninput="this.nextElementSibling.value = this.value">
+                <input type="range" id="rangeInput" name="fy" min="1" max="4" oninput="this.nextElementSibling.value = this.value" required>
                 <output for="fy" id="output">*</output>
             </div>
         </div>

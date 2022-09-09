@@ -1,3 +1,8 @@
+*{
+    /*add grayscale filter to 100 blur to 1px and sepia to 50%*/
+    filter: grayscale(100%) sepia(20%);
+}
+
 body{
     background-image: url(media/PartyBackground.png);
     background-size: 100%;
@@ -39,6 +44,18 @@ body{
     text-shadow: #000000 0px 2px 20px;
 }
 
+#textbox{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 3px;
+}
+
 .button{
     text-decoration: none;
     margin-top: 5vh;
@@ -56,6 +73,7 @@ body{
 .button:hover{
     background-color: #000000;
     border: 3px solid #ffffff;
+    color:#ffffff ;
 }
 
 
@@ -70,7 +88,7 @@ body{
     /* Felxbox */
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .reversecard{
