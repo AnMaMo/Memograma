@@ -1,7 +1,6 @@
 body{
     background-image: url(media/PartyBackground.png);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
 }
 
 .title{
@@ -90,12 +89,26 @@ body{
     border-radius: 5px;
 }
 
-.item {
-    width: calc((100% - 30px) / 4);
-    margin-bottom: 10px;
-    flex: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
+
+/* Mobile mediaquery */
+@media screen and (max-width: 600px) {
+    .title{
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-size: 15vw;
+        text-shadow: #000000 0px 2px 20px;
+        letter-spacing: 0.2em;
+    }
+    
+    
+    .ftitle{
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        margin-bottom: 5vh;
+        font-size: 7vw;
+        text-transform: uppercase;
+    }
 }
