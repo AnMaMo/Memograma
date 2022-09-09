@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEMORY GAME</title>
         <script src="code.js"></script>
+        <script src="validateform.js"></script>
         <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1 class="title">MEMORY GAME</h1>
     <div class="form">
         <!--Init the form in html-->
-        <form action="party.php" method="get">
+        <form name="initialform" action="party.php" method="get" onsubmit="return validate();">
 
             <!--Title-->
             <h1 class="ftitle">Configure the party</h1>
