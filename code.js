@@ -3,7 +3,7 @@ function validate(){
     var form = document.initialform;
 
     if((form.fx.value * form.fy.value)%2 != 0 ){
-        alert("The maximum of cards has to be even");
+        alert("The maximum of cards has to be even!");
         return false;
     }
 
@@ -26,8 +26,13 @@ function validate(){
     var nplayersform = form.nplayers.value;
     // Check if number of players is the same
     if(nplayersent != nplayersform){
-       alert("The number of players has to be equal to the number of names entered");
+       alert("The number of players has to be equal to the number of names entered!");
         return false;
     }
 
+}
+
+
+function cardClick(){
+    alert("card clicked");
 }

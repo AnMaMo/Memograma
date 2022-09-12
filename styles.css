@@ -1,6 +1,6 @@
 *{
     /*add grayscale filter to 100 blur to 1px and sepia to 50%*/
-    filter: grayscale(100%) sepia(20%);
+    /*thinking -> filter: grayscale(100%) sepia(20%); */
     
     /* Global font styles*/
     text-decoration: none;
@@ -64,14 +64,13 @@ body{
 
 
 /*PARTY CSS*/
-.board {
-    position: abs;
-
+.board{
+    width: 75vw;
+    margin: auto;
 }
 
 .reversecard{
-    border-radius: 5px;
-    width: 100%;
+    width: 15vw;
 }
 
 .reversecard img{
@@ -90,7 +89,6 @@ body{
         letter-spacing: 0.2em;
     }
     
-    
     .ftitle{
         margin-bottom: 5vh;
         font-size: 7vw;
@@ -99,5 +97,12 @@ body{
     .button{
         font-size: 5vw;
     }
+
+    .reversecard img{
+        width:75%;
+        height:75%;
+        border-radius: 5px;
+    }
+    
 
 }
