@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div class="board">
+<table class="board"> 
 
 <?php 
     //Get the axe x and y, calculate the total number of cards
@@ -20,26 +20,32 @@
         $fy = $_GET['fy'];
         $cardsnumber = $fx * $fy;
 
-        //Generate the cards
-
-        for($i = 0; $i < $cardsnumber; $i++){
+    //Generate the table and insert the cards
+        // ROWS
+        for($rowY = 0; $rowY < $fy; $rowY++){
             ?>
+            <!-- Open row -->
+                <tr>
+            <?php
+            // COLS
+            for($colX = 0; $colX < $fx; $colX++){
 
+            ?>
+            <td>
             <div class="reversecard"><img src="media/cards/reversecard.png" alt=""></div>
-
+            </td>
             <?php
         }
         ?>
+        <!-- Close row -->
+    </tr>
+        <?php
+    }
+        ?>
 
+        </table>
 
-
-</div>
-
-<a class="button" href="form.html">QUIT</a>
-
-
-
-
+        <a class="button" href="form.html">QUIT</a>
 
 </body>
 </html>
