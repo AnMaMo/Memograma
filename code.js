@@ -32,7 +32,6 @@ function validate(){
 
 }
 
-
-function cardClick(){
-    alert("card clicked");
+function flipCard(id, name){
+    document.getElementById(id).src=("media/cards/"+name+".png");
 }

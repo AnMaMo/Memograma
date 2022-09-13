@@ -35,6 +35,7 @@
 
     //Generate the table and insert the cards
     $nActualCardOfArray = 0;
+    $CardIdNumber = 1;
 
     //Shuffle the array
     shuffle($cards);
@@ -50,10 +51,15 @@
             $actualCard = $cards[$nActualCardOfArray];
             ?>
             <td>
-            <div class="reversecard"><img src="media/cards/reversecard.png" id="<?=$actualCard?>" alt="" onclick="cardClick()"></div>
+
+            <div class="card">
+                    <img src="media/cards/reversecard.png" id="card_<?=$CardIdNumber?>" name="<?=$actualCard?>" onclick="flipCard(this.id, this.name)" alt="" >      
+                </div>
+
             </td>
             <?php
             $nActualCardOfArray++;
+            $CardIdNumber++;
         }
         ?>
         <!-- Close row -->

@@ -69,16 +69,15 @@ body{
     margin: auto;
 }
 
-.reversecard{
+.card{
     width: 15vw;
 }
 
-.reversecard img{
+.card img{
     width:50%;
     height:50%;
     border-radius: 5px;
 }
-
 
 /* Mobile mediaquery */
 @media screen and (max-width: 600px) {
@@ -98,11 +97,28 @@ body{
         font-size: 5vw;
     }
 
-    .reversecard img{
+    .card img{
         width:75%;
         height:75%;
         border-radius: 5px;
     }
-    
 
 }
+
+
+/* Rotate a Card */
+.card {
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+  }
+
+
+
+  .card_front, .card_back {
+    backface-visibility: hidden;
+  }
+
+
+  .card_back {
+    transform: rotateY(180deg);
+  }
