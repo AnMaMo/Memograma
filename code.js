@@ -68,7 +68,7 @@ function flipCard(id, name){
         }
 
         // Now check if the cards are equals
-        setTimeout(checkTheCards, 1000);
+        setTimeout(checkTheCards, 500);
     }
 
 }
@@ -97,10 +97,6 @@ function checkTheCards(){
 
         existFlippedCard = false;
     }else{
-        alert("You have found a pair!");
-
-        // its equals, now change a class to the twho same cards
-
         // Remove a noflipcard class with the twho same cards and add a flipcard class
         document.getElementById(flippedcard1Id).classList.remove('noFlipCard');
         document.getElementById(flippedcard1Id).classList.add('flipCard');

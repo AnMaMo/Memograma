@@ -3,8 +3,8 @@
     --color1: #f9b94b;
     --color2: #4e6c84;
     --color3: #915135;
-    --color4: #a76f60;
-    --color5: #562908;
+    --color4: #b55f5d;
+    --color5: #72824f;
     --white: #ffffff;
     --black: #000000;
 }
@@ -89,6 +89,16 @@ body{
     height:50%;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.noFlipCard{
+    background-color: var(--color4);
+    border-radius: 5px;
+}
+
+.flipCard{
+    background-color: var(--color5);
+    border-radius: 5px;
 }
 
 /* Mobile mediaquery */
