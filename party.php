@@ -11,7 +11,8 @@
 </head>
 <body>
 
-<table class="board"> 
+<div class="board">
+<table class="boardTable"> 
 
 <?php 
     //Get the axe x and y, calculate the total number of cards
@@ -53,7 +54,7 @@
             <td>
 
             <div class="card">
-                    <img src="media/cards/reversecard.png" id="card_<?=$CardIdNumber?>" name="<?=$actualCard?>" onclick="flipCard(this.id, this.name)" alt="" >      
+                    <img src="media/cards/reversecard.png" id="card_<?=$CardIdNumber?>" name="<?=$actualCard?>" class="noFlipCard" onclick="flipCard(this.id, this.name)" alt="" >      
                 </div>
 
             </td>
@@ -69,7 +70,7 @@
         ?>
 
         </table>
-
+        </div>
         <a class="button" href="form.html">QUIT</a>
 
 </body>
