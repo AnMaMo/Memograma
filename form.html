@@ -20,7 +20,7 @@
             <!--Number of players-->
             <div id="test">
                 <p id="ftext">Number of Players</p> 
-                <input type="range" id="rangeInput" name="nplayers" min="1" max="4" oninput="this.nextElementSibling.value = this.value" required>
+                <input type="range" id="rangeInput" name="nplayers" min="1" max="4" onchange="playerSelector(this.value)" oninput="this.nextElementSibling.value = this.value" required>
                 <output for="nplayers" id="output">3</output>
             </div>
 
@@ -48,7 +48,7 @@
         </div>
         <!--Submit button-->
             <input class="button" type="submit" value="PLAY">
-            <a class="button" href="rank.html">RANK</a>
+            <a class="button" href="ranking.php">RANK</a>
         </form> 
     </div>
 </body>

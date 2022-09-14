@@ -32,6 +32,23 @@ function validate(){
 
 }
 
+// Player selector
+function playerSelector(numberofplayers){
+
+    numberofplayers = parseInt(numberofplayers);
+    // Switch case to show the players
+    switch(numberofplayers){
+        case 1:
+            document.getElementsByName("player1").setAttribute("style", "visibility: hidden;");
+            document.getElementsByName("player3").setAttribute("style", "visibility: hidden;");
+            document.getElementsByName("player4").setAttribute("style", "visibility: hidden;");
+            break;
+    }
+
+
+    console.log(numberofplayers);
+}
+
 
 // Global vars
 var existFlippedCard = false;
@@ -120,7 +137,6 @@ function checkTheCards(){
         
         // Check if player wins
         setTimeout(checkIfPlayerWin, 500);
-
     }
 }
 
@@ -129,6 +145,13 @@ function checkIfPlayerWin(){
         // Count the number of cards not flipped
         var cardsNotFlipped = document.getElementsByClassName("noFlipCard");
         if(cardsNotFlipped.length == 0){
+            // Player win
             alert("You win!");
+            // Redirect to the Rankikg page
+            setTimeout(openRanking, 500);
         }    
+}
+
+function openRanking(){
+    window.location.href = "ranking.php";
 }
