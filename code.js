@@ -116,12 +116,19 @@ function checkTheCards(){
         flippedcard1Id = null;
         flippedcard1Name = null;
         flippedcard2Id = null;
-        flippedcard2Name = null;        
+        flippedcard2Name = null;  
+        
+        // Check if player wins
+        setTimeout(checkIfPlayerWin, 500);
 
     }
+}
 
 
-
-
-   
+function checkIfPlayerWin(){
+        // Count the number of cards not flipped
+        var cardsNotFlipped = document.getElementsByClassName("noFlipCard");
+        if(cardsNotFlipped.length == 0){
+            alert("You win!");
+        }    
 }
