@@ -16,6 +16,7 @@
     color: var(--white);
     text-align: center;
     text-transform: uppercase;
+    text-shadow: bold;
     margin: 0px;
     padding: 0px;
 }
@@ -26,46 +27,54 @@ body{
     align-items: center;
 }
 
+.config{
+    margin-top:25px;
+}
+
 .title{
     color: --white;
     margin-top: 20px;
     font-size: 100px;
-    text-shadow: --black 0px 2px 20px;
     letter-spacing: 0.2em;
+    text-shadow: 1px 1px 5px var(--black);
+    letter-spacing: 0.1em;
 }
 
 /*FORM CSS*/
 
-#ftext{
-    margin-top: 20px;
-}
-
 .ftitle{
     margin:0px;
     font-size: 25px;
+    text-shadow: 1px 1px 5px var(--black);
+    letter-spacing: 0.1em;
 }
 
 .panel #test{
     display: inline-block;
 }
 
-#textbox{
+.textbox{
     border: 0px;
     background-color: var(--white);
     color: var(--black);
     margin: 3px;
 }
 
+#rangeInput {
+    margin-bottom: 20px;
+}
+
 .button{
     border:0px;
     cursor: pointer;
     text-decoration: none;
-    margin-top: 50px;
-    padding: 10px;
+    margin: 5px;
+    margin-top: 20px;
+    padding: 5px;
     background-color: var(--color1);
     color: #ffff;
-    border-radius: 5px;
-    font-size: 25px;
+    font-size: 20px;
+    box-shadow: 0px 1px 5px 1px black;
 }
 
 /*PARTY CSS*/
@@ -74,10 +83,20 @@ body{
     margin: auto;
 }
 
+.playersinfo .playerinfo{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 10px 1px black;
+    border-radius: 5px;
+}
+
+
 .boardTable{
-    width: 85%;
+    width: 75%;
     margin: auto;
-    padding: 5%;
+    padding: 10px;
 }
 
 .card{
@@ -121,5 +140,6 @@ body{
         height:75%;
         border-radius: 5px;
     }
-
 }
+
+

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEMORY GAME</title>
-        <script src="code.js"></script>
+        <script src="scripts/validateForm.js"></script>
         <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,36 +14,35 @@
         <!--Init the form in html-->
         <form name="initialform" action="party.php" method="post" onsubmit="return validate();">
 
-            <!--Title-->
-            <h1 class="ftitle">Configure the party</h1>
+
 
             <!--Number of players-->
-            <div id="test">
-                <p id="ftext">Number of Players</p> 
-                <input type="range" id="rangeInput" name="nplayers" min="1" max="4" onchange="playerSelector(this.value)" oninput="this.nextElementSibling.value = this.value" required>
-                <output for="nplayers" id="output">3</output>
+            <div class="config">
+                <p class="ftitle">PLAYERS</p> 
+                <input type="range" value="4" id="rangeInput" name="nplayers" min="1" max="4" oninput="this.nextElementSibling.value = this.value" required>
+                <output for="nplayers" id="output">4</output>
+                <br>
+                <!-- Name of players -->
+                <input type="text" name="player1" class="textbox" placeholder="PLAYER">
+                <input type="text" name="player2" class="textbox" placeholder="PLAYER">
+                <input type="text" name="player3" class="textbox" placeholder="PLAYER">
+                <input type="text" name="player4" class="textbox" placeholder="PLAYER">
             </div>
-
-
-            <!-- Name of players -->
-            <p id="ftext">Nicks of Players</p> 
-            <input type="text" name="player1" id="textbox" placeholder="PLAYER">
-            <input type="text" name="player2" id="textbox" placeholder="PLAYER">
-            <input type="text" name="player3" id="textbox" placeholder="PLAYER">
-            <input type="text" name="player4" id="textbox" placeholder="PLAYER">
-            
 
         <!--Get the size of a panel-->
-        <div class="panel">
-            <div id="test">
-                <p id="ftext">X</p> 
-                <input type="range" id="rangeInput" name="fx" min="1" max="6" oninput="this.nextElementSibling.value = this.value" required>
-                <output for="fx" id="output">4</output>
-            </div>
-            <div id="test">
-                <p id="ftext">Y</p>   
-                <input type="range" id="rangeInput" name="fy" min="1" max="5" oninput="this.nextElementSibling.value = this.value" required>
-                <output for="fy" id="output">3</output>
+        <div class="config">
+            <p class="ftitle">BOARD</p> 
+            <div class="panel">
+                <div id="test">
+                    <p class="ftitle">X</p> 
+                    <input type="range" id="rangeInput" value="6" name="fx" min="2" max="6" oninput="this.nextElementSibling.value = this.value" required>
+                    <output for="fx" id="output">6</output>
+                </div>
+                <div id="test">
+                    <p class="ftitle">Y</p>   
+                    <input type="range" id="rangeInput" value="5" name="fy" min="2" max="5" oninput="this.nextElementSibling.value = this.value" required>
+                    <output for="fy" id="output">5</output>
+                </div>
             </div>
         </div>
         <!--Submit button-->

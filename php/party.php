@@ -7,14 +7,25 @@
     <title>PARTY</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/party.js"></script>
+
 </head>
 <body>
+
+<div class="playersInfo">
+
+</div>
+
+
+
+<div class="board">
+<table class="boardTable"> 
 
 <?php 
     //Get the axe x and y, calculate the total number of cards
         $fx = $_POST['fx'];
         $fy = $_POST['fy'];
         $cardsnumber = $fx * $fy;
+
 
 
         //Get all players
@@ -37,24 +48,11 @@
         if (!empty($player4)) {
             array_push($players, $player4);
         }
-
-        // Create a div with info about players
-    ?>
-        <div class="playersinfo">
-            <?php
-                // Iterate the players array
-                foreach ($players as $player) {
-                    echo "<div class='playerinfo'>";
-                    echo "<p class='playername' name='$player'>$player</p>";
-                    echo "<p class='playerpoints'>0</p>";
-                    echo "</div>";
-                }
-            ?>
-        </div>
         
-    <div class="board">
-    <table class="boardTable"> 
-        <?php
+
+
+
+
 
         // Create array for the cards
         $cards = array();
