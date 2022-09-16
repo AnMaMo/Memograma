@@ -32,4 +32,18 @@
        alert("You need to enter minimum 1 player!");
         return false;
     }
+
+    // all players in a array
+    var players = [form.player1.value, form.player2.value, form.player3.value, form.player4.value];
+
+    // Check if the players are equals
+    for(var i = 0; i < players.length; i++){
+        for(var j = 0; j < players.length; j++){
+            if(players[i] == players[j] && i != j && players[i] != ""){
+                alert("The players can't be equals!");
+                return false;
+            }
+        }
+    }
+
 }
