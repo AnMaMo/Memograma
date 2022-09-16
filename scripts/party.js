@@ -1,16 +1,23 @@
+var turnPlayer = null;
+var players = new Array();
+
+/**
+ * This is the principal function of the game
+ */
 window.onload = function startParty(){
-
 //Get a players inside the playersinfo div
-var players = document.getElementsByClassName("playername");
-
-var playerNames = new Array();
+var playerelements = document.getElementsByClassName("playername");
 
 //Iterate the players and get the name of the player
-for(var i = 0; i < players.length; i++){
-    playerNames[i] = players[i].getAttribute("name");
+for(var i = 0; i < playerelements.length; i++){
+    players[i] = playerelements[i].getAttribute("id");
 }
 
-alert(playerNames);
+var numberofplayers = players.length;
+
+// Set the first player of the array his tourn
+turnPlayer = players[0];
+document.getElementById(turnPlayer+"-div").style.backgroundColor = "red";
 
 }
 
@@ -89,11 +96,12 @@ function checkTheCards(){
             allCards[i].setAttribute("onclick", "flipCard(this.id, this.name)");
         }
 
-        //poner atributo onclick
-        document.getElementById(flippedcard1Id).setAttribute("onclick", "flipCard(this.id, this.name)");
-        document.getElementById(flippedcard2Id).setAttribute("onclick", "flipCard(this.id, this.name)");
-
         existFlippedCard = false;
+        
+        //Discover what element of the array is the actual player
+        var actualPlayerIndex = players.indexOf(turnPlayer);
+        changeTurn(actualPlayerIndex);
+
     }else{
         // Remove a noflipcard class with the twho same cards and add a flipcard class
         document.getElementById(flippedcard1Id).classList.remove('noFlipCard');
@@ -116,6 +124,9 @@ function checkTheCards(){
         flippedcard2Id = null;
         flippedcard2Name = null;  
         
+        // Add a point to the player
+        addPointToPlayer(turnPlayer);
+
         // Check if player wins
         setTimeout(checkIfPlayerWin, 500);
     }
@@ -147,3 +158,21 @@ function checkIfPlayerWin(){
 function openRanking(){
     window.location.href = "ranking.php";
 }
+
+/**
+ * Function to change the turn of the player
+ * @param {*} actualPlayerIndex 
+ */
+function changeTurn(actualPlayerIndex){
+    // Change the color of the actual player to white
+    document.getElementById(turnPlayer+"-div").style.backgroundColor = null;
+    // Change the actual player
+    if(actualPlayerIndex == players.length - 1){
+        turnPlayer = players[0];
+    }else{
+        turnPlayer = players[actualPlayerIndex + 1];
+    }
+    // Change the color of the new player to red
+    document.getElementById(turnPlayer+"-div").style.backgroundColor = "red";
+}
+

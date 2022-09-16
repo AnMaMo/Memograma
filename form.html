@@ -19,9 +19,6 @@
             <!--Number of players-->
             <div class="config">
                 <p class="ftitle">PLAYERS</p> 
-                <input type="range" value="4" id="rangeInput" name="nplayers" min="1" max="4" oninput="this.nextElementSibling.value = this.value" required>
-                <output for="nplayers" id="output">4</output>
-                <br>
                 <!-- Name of players -->
                 <input type="text" name="player1" class="textbox" placeholder="PLAYER">
                 <input type="text" name="player2" class="textbox" placeholder="PLAYER">
@@ -30,8 +27,6 @@
             </div>
 
         <!--Get the size of a panel-->
-        <div class="config">
-            <p class="ftitle">BOARD</p> 
             <div class="panel">
                 <div id="test">
                     <p class="ftitle">X</p> 
@@ -43,7 +38,6 @@
                     <input type="range" id="rangeInput" value="5" name="fy" min="2" max="5" oninput="this.nextElementSibling.value = this.value" required>
                     <output for="fy" id="output">5</output>
                 </div>
-            </div>
         </div>
         <!--Submit button-->
             <input class="button" type="submit" value="PLAY">

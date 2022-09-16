@@ -1,10 +1,10 @@
 :root{
     /* Global variable colors*/
     --color1: #f9b94b;
-    --color2: #4e6c84;
-    --color3: #915135;
-    --color4: #b55f5d;
-    --color5: #72824f;
+    --color2: #141852;
+    --color3: #6b4984;
+    --color4: #855988;
+    --color5: #483475;
     --white: #ffffff;
     --black: #000000;
 }
@@ -22,13 +22,16 @@
 }
 
 body{
-    background-image: url(media/background.webp);
+    background-image: url(media/background.jpg);
     background-size: 100%;
+    /*background no repeat set to cover*/
+    background-size: cover;
+
     align-items: center;
 }
 
 .config{
-    margin-top:25px;
+    margin-top:0px;
 }
 
 .title{
@@ -43,7 +46,7 @@ body{
 /*FORM CSS*/
 
 .ftitle{
-    margin:0px;
+    margin:20px;
     font-size: 25px;
     text-shadow: 1px 1px 5px var(--black);
     letter-spacing: 0.1em;
@@ -106,13 +109,11 @@ body{
 .card img{
     width:50%;
     height:50%;
-    border-radius: 5px;
     cursor: pointer;
 }
 
 .noFlipCard{
     background-color: var(--color4);
-    border-radius: 5px;
 }
 
 .flipCard{

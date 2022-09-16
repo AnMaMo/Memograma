@@ -27,10 +27,9 @@
         }
 
         
-    var nplayersform = form.nplayers.value;
-    // Check if number of players is the same
-    if(nplayersent != nplayersform){
-       alert("The number of players has to be equal to the number of names entered!");
+    // Check if user enter a minimum 1 player
+    if(nplayersent < 1){
+       alert("You need to enter minimum 1 player!");
         return false;
     }
 }

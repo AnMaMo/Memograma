@@ -44,9 +44,9 @@
             <?php
                 // Iterate the players array
                 foreach ($players as $player) {
-                    echo "<div class='playerinfo'>";
-                    echo "<p class='playername' name='$player'>$player</p>";
-                    echo "<p class='playerpoints'>0</p>";
+                    echo "<div class='playerinfo' id='$player-div'>";
+                    echo "<p class='playername' id='$player'>$player</p>";
+                    echo "<p class='playerpoints' id='$player-points'>0</p>";
                     echo "</div>";
                 }
             ?>
