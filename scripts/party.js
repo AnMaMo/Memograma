@@ -10,10 +10,21 @@ var actualPlayer = null;
 var turnPlayer = null;
 var players = new Array();
 
+// Party vars
+var countdownTime = null;
+
+
+
+
 /**
  * This is the principal function of the game
  */
 window.onload = function startParty(){
+
+//Set value to contdownTime
+countdownTime = parseInt(document.getElementById("counter").textContent);
+
+    
 //Get a players inside the playersinfo div
 var playerelements = document.getElementsByClassName("playername");
 
@@ -169,6 +180,9 @@ function checkIfPlayerWin(){
             }
 
 
+            // Stop the contdown
+            stopContdown();
+
             // Player win
             alert(winner + " wins with " + winnerpoints + "points!");
             // Redirect to the Rankikg page
@@ -227,15 +241,16 @@ function addPointToPlayer(player){
 }
 
 
+
+
 /**
  * Contdown infinite function
  */
- setInterval(function countdown(){ 
+ var timer = setInterval(function countdown(){ 
     var time = parseInt(document.getElementById("counter").textContent);
     document.getElementById("counter").innerText = parseInt(time)-1;
     if(time < 1){
-        time = 10;
-        document.getElementById("counter").innerText = time;
+        restartCountdown();
 
         //Discover what element of the array is the actual player
         var actualPlayerIndex = players.indexOf(turnPlayer);
@@ -250,5 +265,12 @@ function addPointToPlayer(player){
  * function to restart contdown
  */
 function restartCountdown(){
-    document.getElementById("counter").innerText = 10;
+    document.getElementById("counter").innerText = countdownTime;
+}
+
+/**
+ * Function to stop the contdown
+ */
+function stopContdown(){
+    clearInterval(timer);
 }

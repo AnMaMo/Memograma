@@ -68,6 +68,10 @@ body{
     margin-bottom: 20px;
 }
 
+#timeinput{
+    color: var(--black);
+}
+
 .button{
     border:0px;
     cursor: pointer;

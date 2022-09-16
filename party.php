@@ -15,6 +15,7 @@
         $fx = $_POST['fx'];
         $fy = $_POST['fy'];
         $cardsnumber = $fx * $fy;
+        $time = $_POST['ftime'];
 
 
         //Get all players
@@ -50,7 +51,7 @@
                     echo "</div>";
                 }
             ?>
-                <div id="counter">10</div>            
+                <div id="counter"><?=$time?></div>            
         </div>
         
     <div class="board">
