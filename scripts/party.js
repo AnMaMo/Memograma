@@ -176,3 +176,13 @@ function changeTurn(actualPlayerIndex){
     document.getElementById(turnPlayer+"-div").style.backgroundColor = "red";
 }
 
+function addPointToPlayer(player){
+    // Get the player points
+    var playerpoints = document.getElementById(player + "-points").textContent
+
+    playerpoints = parseInt(playerpoints);
+    playerpoints++;
+
+    document.getElementById(player + "-points").innerText = playerpoints;
+
+}
