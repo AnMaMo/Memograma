@@ -1,3 +1,12 @@
+//Card vars
+var existFlippedCard = false;
+var flippedcard1Id = null;
+var flippedcard1Name = null;
+var flippedcard2Id = null;
+var flippedcard2Name = null;
+
+// Player vars
+var actualPlayer = null;
 var turnPlayer = null;
 var players = new Array();
 
@@ -17,21 +26,10 @@ var numberofplayers = players.length;
 
 // Set the first player of the array his tourn
 turnPlayer = players[0];
-document.getElementById(turnPlayer+"-div").style.backgroundColor = "red";
+document.getElementById(turnPlayer+"-div").style.backgroundColor = "#b64545";
 
 }
 
-//FUNCTIONS INTO THE GAME
-
-//Card vars
-var existFlippedCard = false;
-var flippedcard1Id = null;
-var flippedcard1Name = null;
-var flippedcard2Id = null;
-var flippedcard2Name = null;
-
-// Player vars
-var actualPlayer = null;
 
 
 
@@ -70,7 +68,6 @@ function flipCard(id, name){
         // Now check if the cards are equals
         setTimeout(checkTheCards, 500);
     }
-
 }
 
 
@@ -81,6 +78,7 @@ function flipCard(id, name){
  * @returns {undefined}
  */
 function checkTheCards(){
+
     // See if twho cards is the same card
     if(flippedcard1Name != flippedcard2Name){
                 
@@ -103,6 +101,9 @@ function checkTheCards(){
         changeTurn(actualPlayerIndex);
 
     }else{
+        // The cards are equals now restart the countdown
+        restartCountdown();
+
         // Remove a noflipcard class with the twho same cards and add a flipcard class
         document.getElementById(flippedcard1Id).classList.remove('noFlipCard');
         document.getElementById(flippedcard1Id).classList.add('flipCard');
@@ -142,10 +143,36 @@ function checkIfPlayerWin(){
         // Count the number of cards not flipped
         var cardsNotFlipped = document.getElementsByClassName("noFlipCard");
         if(cardsNotFlipped.length == 0){
+            var winner = null;
+            var winnerpoints = 0;
+            var player = null;
+            var playerpoints = 0;
+
+
+            //Check what player has more points
+            for(var i = 0; i < players.length; i++){
+                if(i == 0){
+                    // Get the first player set the winner and his points is the winnerpoints
+                    winner = players[i];
+                    winnerpoints = parseInt(document.getElementById(winner + "-points").textContent);
+                    continue;
+                }
+
+                // Save the actual Player
+                player = players[i];
+                playerpoints = parseInt(document.getElementById(player + "-points").textContent);
+
+                if(playerpoints > winnerpoints){
+                    winner = player;
+                    winnerpoints = playerpoints;
+                }
+            }
+
+
             // Player win
-            alert("You win!");
+            alert(winner + " wins with " + winnerpoints + "points!");
             // Redirect to the Rankikg page
-            setTimeout(openRanking, 500);
+            //setTimeout(openRanking, 500);
         }    
 }
 
@@ -159,11 +186,17 @@ function openRanking(){
     window.location.href = "ranking.php";
 }
 
+
+
+
 /**
  * Function to change the turn of the player
  * @param {*} actualPlayerIndex 
  */
 function changeTurn(actualPlayerIndex){
+    // Restart the countdown
+    restartCountdown();
+
     // Change the color of the actual player to white
     document.getElementById(turnPlayer+"-div").style.backgroundColor = null;
     // Change the actual player
@@ -173,9 +206,16 @@ function changeTurn(actualPlayerIndex){
         turnPlayer = players[actualPlayerIndex + 1];
     }
     // Change the color of the new player to red
-    document.getElementById(turnPlayer+"-div").style.backgroundColor = "red";
+    document.getElementById(turnPlayer+"-div").style.backgroundColor = "#b64545";
 }
 
+
+
+
+/**
+ * Function to add a point to the player
+ * @param {} player 
+ */
 function addPointToPlayer(player){
     // Get the player points
     var playerpoints = document.getElementById(player + "-points").textContent
@@ -184,5 +224,31 @@ function addPointToPlayer(player){
     playerpoints++;
 
     document.getElementById(player + "-points").innerText = playerpoints;
+}
 
+
+/**
+ * Contdown infinite function
+ */
+ setInterval(function countdown(){ 
+    var time = parseInt(document.getElementById("counter").textContent);
+    document.getElementById("counter").innerText = parseInt(time)-1;
+    if(time < 1){
+        time = 10;
+        document.getElementById("counter").innerText = time;
+
+        //Discover what element of the array is the actual player
+        var actualPlayerIndex = players.indexOf(turnPlayer);
+        changeTurn(actualPlayerIndex);        
+    }
+}, 1000);
+
+
+
+
+/**
+ * function to restart contdown
+ */
+function restartCountdown(){
+    document.getElementById("counter").innerText = 10;
 }

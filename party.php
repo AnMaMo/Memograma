@@ -50,6 +50,7 @@
                     echo "</div>";
                 }
             ?>
+                <div id="counter">10</div>            
         </div>
         
     <div class="board">
