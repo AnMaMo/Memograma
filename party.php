@@ -48,10 +48,11 @@
                     echo "<div class='playerinfo' id='$player-div'>";
                     echo "<p class='playername' id='$player'>$player</p>";
                     echo "<p class='playerpoints' id='$player-points'>0</p>";
+                    echo "<text>Time: </text><text class='playerTime' id='$player-time'>0</text>";
                     echo "</div>";
                 }
             ?>
-                <div id="counter"><?=$time?></div>            
+                <div id="CountDown"><text>CountDown: </text> <text id="counter"><?=$time?></text></div>            
         </div>
         
     <div class="board">
