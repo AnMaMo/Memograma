@@ -54,9 +54,7 @@
             ?>
                 <div id="CountDown"><text>CountDown: </text> <text id="counter"><?=$time?></text></div>            
         </div>
-        
-    <div class="board">
-    <table class="boardTable"> 
+
         <?php
 
         // Create array for the cards
@@ -79,35 +77,35 @@
     //Shuffle the array
     shuffle($cards);
 
+?>
+    <div class="board">
+<?php
+
         // ROWS
         for($rowY = 0; $rowY < $fy; $rowY++){
             ?>
             <!-- Open row -->
-                <tr>
+                <div class="row">
             <?php
             // COLS
             for($colX = 0; $colX < $fx; $colX++){
             $actualCard = $cards[$nActualCardOfArray];
             ?>
-            <td>
 
             <div class="card">
                     <img src="media/cards/reversecard.png" id="card_<?=$CardIdNumber?>" name="<?=$actualCard?>" class="noFlipCard" onclick="flipCard(this.id, this.name)" alt="" >      
                 </div>
-
-            </td>
             <?php
             $nActualCardOfArray++;
             $CardIdNumber++;
         }
         ?>
         <!-- Close row -->
-    </tr>
+    </div>
         <?php
     }
         ?>
 
-        </table>
         </div>
         <a class="button" href="form.html">QUIT</a>
 
