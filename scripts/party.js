@@ -40,10 +40,6 @@ window.onload = function startParty() {
     document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
 
     countdownfunction();
-
-    if(players.length == 1){
-        stopContdown();
-    }
 }
 
 
@@ -159,149 +155,208 @@ function checkIfPlayerWin() {
     // Count the number of cards not flipped
     var cardsNotFlipped = document.getElementsByClassName("noFlipCard");
     if (cardsNotFlipped.length == 0) {
-        var winner = null;
-        var winnerpoints = 0;
-        var player = null;
-        var playerpoints = 0;
+        stopCountdown();
+        getTheWinner();
+    }
+}
 
 
-        //Check what player has more points
-        for (var i = 0; i < players.length; i++) {
-            if (i == 0) {
-                // Get the first player set the winner and his points is the winnerpoints
-                winner = players[i];
-                winnerpoints = parseInt(document.getElementById(winner + "-points").textContent);
-                continue;
+
+
+
+function getTheWinner() {
+    // Create a array of points insert the points of the players sort them and get the maximum points of the array
+    var points = new Array();
+
+    for (var i = 0; i < players.length; i++) {
+        points[i] = parseInt(document.getElementById(players[i] + "-points").textContent);
+    }
+
+    points.sort();
+    var maxPoints = points[points.length - 1];
+
+
+    // Create a array of players with max points and insert the players with max points
+    var playersWithMaxPoints = new Array();
+
+    for (var i = 0; i < players.length; i++) {
+        if (parseInt(document.getElementById(players[i] + "-points").textContent) == maxPoints) {
+            playersWithMaxPoints.push(players[i]);
+        }
+
+        // If the array of players with max points is 1 the player win
+        if (playersWithMaxPoints.length == 1) {
+            alert("The winner is " + playersWithMaxPoints[0]);
+//            addPlayerToRanking()
+            openRanking();
+
+            // Else need use the time of detect the winner
+        } else {
+            //Get the time of the players with max points and add it in to the array TimeOfMaxPoints sort them and get the minimum time
+            var TimeOfMaxPoints = new Array();
+
+            for (var i = 0; i < players.length; i++) {
+                var points = document.getElementById(players[i] + "-points").textContent;
+                if (points == maxPoints) {
+                    TimeOfMaxPoints.push(document.getElementById(players[i] + "-time").textContent);
+                }
             }
 
-            // Save the actual Player
-            player = players[i];
-            playerpoints = parseInt(document.getElementById(player + "-points").textContent);
+            TimeOfMaxPoints.sort();
 
-            if (playerpoints > winnerpoints) {
-                winner = player;
-                winnerpoints = playerpoints;
+            // Get the winnerpoints and the winner time
+            var winnerTime = TimeOfMaxPoints[0];
+            var winnerPoints = maxPoints;
+
+            // Create a array of players with the winnerpoints and the winner time
+            var WinnerPlayers = new Array();
+
+            // Iterate all players to search the winners
+            for (var i = 0; i < players.length; i++) {
+                var points = document.getElementById(players[i] + "-points").textContent;
+                var time = document.getElementById(players[i] + "-time").textContent;
+                if (points == winnerPoints && time == winnerTime) {
+                    WinnerPlayers.push(players[i]);
+                }
+            }
+
+            // If the array of winner players is 1 the player win
+            if (WinnerPlayers.length == 1) {
+                alert("The winner is " + WinnerPlayers[0]);
+//              addPlayerToRanking()
+                openRanking();
+            } else {
+                alert("tie");
+                openRanking();
+            }
+        }
+    }
+}
+
+
+
+        function addPlayerToRanking(playername, points, time) {
+
+        }
+
+
+
+
+        /**
+         * This function open the ranking page.
+         */
+        function openRanking() {
+            window.location.href = "ranking.php";
+        }
+
+
+
+
+        /**
+         * Function to change the turn of the player
+         * @param {*} actualPlayerIndex 
+         */
+        function changeTurn(actualPlayerIndex) {
+            // Restart the countdown
+            restartCountdown();
+
+            // Change the color of the actual player to white
+            document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
+            // Change the actual player
+            if (actualPlayerIndex == players.length - 1) {
+                turnPlayer = players[0];
+            } else {
+                turnPlayer = players[actualPlayerIndex + 1];
+            }
+            // Change the color of the new player to red
+            document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
+        }
+
+
+
+
+        /**
+         * Function to add a point to the player
+         * @param {} player 
+         */
+        function addPointToPlayer(player) {
+            // Get the player points
+            var playerpoints = document.getElementById(player + "-points").textContent
+
+            playerpoints = parseInt(playerpoints);
+            playerpoints++;
+
+            document.getElementById(player + "-points").innerText = playerpoints;
+        }
+
+
+
+
+        /**
+         * Add time to player
+         * @param {*} player 
+         */
+        function addTimeToPlayer(player) {
+            playertime = parseInt(document.getElementById(player + "-time").textContent);
+            document.getElementById(player + "-time").innerText = playertime + 1;
+        }
+
+
+
+
+
+        /**
+         * Contdown infinite function
+         */
+        var timerCountDown;
+        function countdownfunction() {
+            timerCountDown = setInterval(countdown, 1000);
+            function countdown() {
+                if (players.length != 1) {
+                    var time = parseInt(document.getElementById("counter").textContent);
+                    document.getElementById("counter").innerText = parseInt(time) - 1;
+                    if (time < 1) {
+                        restartCountdown();
+
+                        //Discover what element of the array is the actual player
+                        var actualPlayerIndex = players.indexOf(turnPlayer);
+                        changeTurn(actualPlayerIndex);
+                    }
+                }
+
+                addTimeToPlayer(turnPlayer);
             }
         }
 
 
-        // Stop the contdown
-        stopContdown();
-
-        // Player win
-        alert(winner + " wins with " + winnerpoints + "points!");
-        // Redirect to the Rankikg page
-        //setTimeout(openRanking, 500);
-    }
-}
 
 
-
-
-/**
- * This function open the ranking page.
- */
-function openRanking() {
-    window.location.href = "ranking.php";
-}
-
-
-
-
-/**
- * Function to change the turn of the player
- * @param {*} actualPlayerIndex 
- */
-function changeTurn(actualPlayerIndex) {
-    // Restart the countdown
-    restartCountdown();
-
-    // Change the color of the actual player to white
-    document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
-    // Change the actual player
-    if (actualPlayerIndex == players.length - 1) {
-        turnPlayer = players[0];
-    } else {
-        turnPlayer = players[actualPlayerIndex + 1];
-    }
-    // Change the color of the new player to red
-    document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
-}
-
-
-
-
-/**
- * Function to add a point to the player
- * @param {} player 
- */
-function addPointToPlayer(player) {
-    // Get the player points
-    var playerpoints = document.getElementById(player + "-points").textContent
-
-    playerpoints = parseInt(playerpoints);
-    playerpoints++;
-
-    document.getElementById(player + "-points").innerText = playerpoints;
-}
-
-
-
-
-/**
- * Add time to player
- * @param {*} player 
- */
-function addTimeToPlayer (player) {
-    playertime = parseInt(document.getElementById(player+"-time").textContent) ;
-    document.getElementById(player+"-time").innerText =playertime + 1;
-}
-
-
-
-
-
-/**
- * Contdown infinite function
- */
-    var timerCountDown;
-    function countdownfunction() {
-            timerCountDown = setInterval(countdown, 1000);
-            function countdown() {
-                var time = parseInt(document.getElementById("counter").textContent);
-                document.getElementById("counter").innerText = parseInt(time) - 1;
-
-                addTimeToPlayer(turnPlayer);
-
-                if (time < 1) {
-                    restartCountdown();
-        
-                    //Discover what element of the array is the actual player
-                    var actualPlayerIndex = players.indexOf(turnPlayer);
-                    changeTurn(actualPlayerIndex);
-                }
+        /**
+         * function to restart contdown
+         */
+        function restartCountdown() {
+            if (players.length != 1) {
+                document.getElementById("counter").innerText = countdownTime;
             }
-    }
+        }
 
 
 
 
-/**
- * function to restart contdown
- */
-function restartCountdown() {
-    if (players.length != 1) {
-        document.getElementById("counter").innerText = countdownTime;
-    }
-}
+        /**
+         * Function to stop the contdown
+         */
+        function stopCountdown() {
+            clearInterval(timerCountDown);
+            document.getElementById("counter").innerText = "";
+        }
 
 
-
-
-/**
- * Function to stop the contdown
- */
-function stopContdown() {
-    clearInterval(timer);
-    document.getElementById("counter").innerText = "";
-}
+        // click the key p and stop the countdown
+        document.addEventListener('keydown', function (event) {
+            
+            if (event.keyCode == 80) {
+                stopCountdown();
+            }
+        }
+        );
