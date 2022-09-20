@@ -12,7 +12,7 @@ var players = new Array();
 
 // Party vars
 var countdownTime = null;
-
+var isRickRollVar = false;
 
 
 
@@ -40,9 +40,32 @@ window.onload = function startParty() {
     document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
 
     countdownfunction();
+
+
+    /* EASTER EGG Rick Roll */
+    isRickRoll();
 }
 
 
+
+/**
+ * 
+ */
+function isRickRoll() {
+    for (var i = 0; i < players.length; i++) {
+        if (players[i].toUpperCase() == "RICK") {
+            // set background to Rick
+            document.getElementById("rick").style.backgroundImage = "url('media/rickroll-gif.gif')";
+            //set width background to 50px
+            document.getElementById("rick").style.backgroundSize = "100px";
+            document.getElementById("rick").style.backgroundRepeat = "repeat";
+
+            // Set variables to play music
+            isRickRollVar = true;
+            alert("Rick Roll Mode activated");
+        }
+    }
+}
 
 
 /**
@@ -93,7 +116,6 @@ function checkTheCards() {
 
     // See if twho cards is the same card
     if (flippedcard1Name != flippedcard2Name) {
-
         // Set the cards to the back
         document.getElementById(flippedcard1Id).src = ("media/cards/reversecard.png");
         document.getElementById(flippedcard2Id).src = ("media/cards/reversecard.png");
@@ -163,7 +185,9 @@ function checkIfPlayerWin() {
 
 
 
-
+/**
+ * Function to get the winner of the game
+ */
 function getTheWinner() {
     // Create a array of points insert the points of the players sort them and get the maximum points of the array
     var points = new Array();
@@ -186,9 +210,13 @@ function getTheWinner() {
 
         // If the array of players with max points is 1 the player win
         if (playersWithMaxPoints.length == 1) {
-            alert("The winner is " + playersWithMaxPoints[0]);
-//            addPlayerToRanking()
-            openRanking();
+            alert("The winner1 is " + playersWithMaxPoints[0]);
+            var winnerName = playersWithMaxPoints[0];
+            var pointsWinner = document.getElementById(winnerName + "-points").textContent;
+            var timeWinner = document.getElementById(winnerName + "-time").textContent;
+
+            addPlayerToRanking(winnerName, pointsWinner, timeWinner);
+            return;
 
             // Else need use the time of detect the winner
         } else {
@@ -223,8 +251,11 @@ function getTheWinner() {
             // If the array of winner players is 1 the player win
             if (WinnerPlayers.length == 1) {
                 alert("The winner is " + WinnerPlayers[0]);
-//              addPlayerToRanking()
-                openRanking();
+                var winnerName = WinnerPlayers[0];
+                var pointsWinner = document.getElementById(winnerName + "-points").textContent;
+                var timeWinner = document.getElementById(winnerName + "-time").textContent;
+    
+                addPlayerToRanking(winnerName, pointsWinner, timeWinner);
             } else {
                 alert("tie");
                 openRanking();
@@ -234,129 +265,191 @@ function getTheWinner() {
 }
 
 
+/**
+ * Function to add a player to the ranking cookie
+ * @param {*} playername 
+ * @param {*} points 
+ * @param {*} time 
+ */
+function addPlayerToRanking(playername, points, time) {
+    // Create a object player with the name, points and time
+    var player = {
+        name: playername,
+        points: points,
+        time: time
+    };
 
-        function addPlayerToRanking(playername, points, time) {
-
-        }
-
+    // Debug
+    alert("PLAYER= " + player.name + " " + player.points + " " + player.time);
 
 
-
-        /**
-         * This function open the ranking page.
-         */
-        function openRanking() {
-            window.location.href = "ranking.php";
-        }
+    // Get the array
+    var ranking = getCookie("ranking");
+    var rankingArray = JSON.parse(ranking);
 
 
+    // Check if cookie ranking exist
+    if (rankingArray == null) {
+        //Here create a array and a cookie with 1 player inside the array
+        var plArr = new Array();
+        plArr.push(player);
+
+        var cookieArray = JSON.stringify(plArr);
+
+        setCookie('ranking', cookieArray);
+    } else {
+       //Here get the cookie array add a player order it and create a cookie now
+    }
 
 
-        /**
-         * Function to change the turn of the player
-         * @param {*} actualPlayerIndex 
-         */
-        function changeTurn(actualPlayerIndex) {
-            // Restart the countdown
-            restartCountdown();
 
-            // Change the color of the actual player to white
-            document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
-            // Change the actual player
-            if (actualPlayerIndex == players.length - 1) {
-                turnPlayer = players[0];
-            } else {
-                turnPlayer = players[actualPlayerIndex + 1];
+
+
+    // Open the ranking
+    //  openRanking();
+}
+
+
+
+
+/**
+ * This function open the ranking page.
+ */
+function openRanking() {
+    window.location.href = "ranking.php";
+}
+
+
+
+
+/**
+ * Function to change the turn of the player
+ * @param {*} actualPlayerIndex 
+ */
+function changeTurn(actualPlayerIndex) {
+    // Restart the countdown
+    restartCountdown();
+
+    // Change the color of the actual player to white
+    document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
+    // Change the actual player
+    if (actualPlayerIndex == players.length - 1) {
+        turnPlayer = players[0];
+    } else {
+        turnPlayer = players[actualPlayerIndex + 1];
+    }
+    // Change the color of the new player to red
+    document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
+}
+
+
+
+
+/**
+ * Function to add a point to the player
+ * @param {} player 
+ */
+function addPointToPlayer(player) {
+    // Get the player points
+    var playerpoints = document.getElementById(player + "-points").textContent
+
+    playerpoints = parseInt(playerpoints);
+    playerpoints++;
+
+    document.getElementById(player + "-points").innerText = playerpoints;
+}
+
+
+
+
+/**
+ * Add time to player
+ * @param {*} player 
+ */
+function addTimeToPlayer(player) {
+    playertime = parseInt(document.getElementById(player + "-time").textContent);
+    document.getElementById(player + "-time").innerText = playertime + 1;
+}
+
+
+
+
+
+/**
+ * Contdown infinite function
+ */
+var timerCountDown;
+function countdownfunction() {
+    timerCountDown = setInterval(countdown, 1000);
+    function countdown() {
+        if (players.length != 1) {
+            var time = parseInt(document.getElementById("counter").textContent);
+            document.getElementById("counter").innerText = parseInt(time) - 1;
+            if (time < 1) {
+                restartCountdown();
+
+                //Discover what element of the array is the actual player
+                var actualPlayerIndex = players.indexOf(turnPlayer);
+                changeTurn(actualPlayerIndex);
             }
-            // Change the color of the new player to red
-            document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
         }
 
-
-
-
-        /**
-         * Function to add a point to the player
-         * @param {} player 
-         */
-        function addPointToPlayer(player) {
-            // Get the player points
-            var playerpoints = document.getElementById(player + "-points").textContent
-
-            playerpoints = parseInt(playerpoints);
-            playerpoints++;
-
-            document.getElementById(player + "-points").innerText = playerpoints;
-        }
+        addTimeToPlayer(turnPlayer);
+    }
+}
 
 
 
 
-        /**
-         * Add time to player
-         * @param {*} player 
-         */
-        function addTimeToPlayer(player) {
-            playertime = parseInt(document.getElementById(player + "-time").textContent);
-            document.getElementById(player + "-time").innerText = playertime + 1;
-        }
+/**
+ * function to restart contdown
+ */
+function restartCountdown() {
+    if (players.length != 1) {
+        document.getElementById("counter").innerText = countdownTime;
+    }
+}
 
 
 
 
-
-        /**
-         * Contdown infinite function
-         */
-        var timerCountDown;
-        function countdownfunction() {
-            timerCountDown = setInterval(countdown, 1000);
-            function countdown() {
-                if (players.length != 1) {
-                    var time = parseInt(document.getElementById("counter").textContent);
-                    document.getElementById("counter").innerText = parseInt(time) - 1;
-                    if (time < 1) {
-                        restartCountdown();
-
-                        //Discover what element of the array is the actual player
-                        var actualPlayerIndex = players.indexOf(turnPlayer);
-                        changeTurn(actualPlayerIndex);
-                    }
-                }
-
-                addTimeToPlayer(turnPlayer);
-            }
-        }
+/**
+ * Function to stop the contdown
+ */
+function stopCountdown() {
+    clearInterval(timerCountDown);
+    document.getElementById("counter").innerText = "";
+}
 
 
+// click the key p and stop the countdown
+document.addEventListener('keydown', function (event) {
+
+    if (event.keyCode == 80) {
+        stopCountdown();
+    }
+}
+);
 
 
-        /**
-         * function to restart contdown
-         */
-        function restartCountdown() {
-            if (players.length != 1) {
-                document.getElementById("counter").innerText = countdownTime;
-            }
-        }
+/**
+ * Function to create and save a cookie
+ * @param {*} name 
+ * @param {*} value 
+ */
+function setCookie(name, value) {
+    var cookie = [name, '=', value, ', domain=.', window.location.host.toString(), ', path=/;'].join('');
+    document.cookie = cookie;
+}
 
 
-
-
-        /**
-         * Function to stop the contdown
-         */
-        function stopCountdown() {
-            clearInterval(timerCountDown);
-            document.getElementById("counter").innerText = "";
-        }
-
-
-        // click the key p and stop the countdown
-        document.addEventListener('keydown', function (event) {
-            
-            if (event.keyCode == 80) {
-                stopCountdown();
-            }
-        }
-        );
+/**
+ * Method to read a cookieF
+ * @param {*} name 
+ * @returns 
+ */
+function getCookie(name) {
+    var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+    result && (result = JSON.parse(result[1]));
+    return result;
+}

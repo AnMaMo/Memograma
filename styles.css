@@ -107,6 +107,9 @@ body{
     flex-direction: row;
 }
 
+.card {
+    max-width: 25%;
+}
 .card img{
     max-width: 100%;
     cursor: pointer;

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/party.js"></script>
 </head>
-<body>
+<body id="rick">
 
 <?php 
     //Get the axe x and y, calculate the total number of cards
