@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="allForm">
     <h1 class="title">MEMORY GAME</h1>
     <div class="form">
         <!--Init the form in html-->
@@ -28,16 +29,16 @@
 
         <!--Get the size of a panel-->
             <div class="panel">
-                <div id="test">
+                <div id="value">
                     <p class="ftitle">X</p> 
                     <input type="range" id="rangeInput" value="6" name="fx" min="2" max="6" oninput="this.nextElementSibling.value = this.value" required>
                     <output for="fx" id="output">6</output>
                 </div>
-                <div id="test">
+                <div id="value">
                     <p class="ftitle">TIME</p>   
                     <input type="number" id="timeinput" name="ftime" value="5" min="5" max="10" required>
                 </div>
-                <div id="test">
+                <div id="value">
                     <p class="ftitle">Y</p>   
                     <input type="range" id="rangeInput" value="5" name="fy" min="2" max="5" oninput="this.nextElementSibling.value = this.value" required>
                     <output for="fy" id="output">5</output>
@@ -48,5 +49,6 @@
             <a class="button" href="ranking.php">RANK</a>
         </form> 
     </div>
+</div>
 </body>
 </html>
