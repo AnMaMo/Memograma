@@ -9,8 +9,28 @@
     <script src="code.js"></script>
 </head>
 <body>
+<h1 class="title">RANKING</h1>
+<?php
+    //Get the cookie ranking decode it and get the array
+    $rankingcookie = isset($_COOKIE["ranking"]);
+    $ranking = json_decode($_COOKIE["ranking"], true);
 
+    //Iterate array and echo it info
+    for($i = 0; $i < count($ranking); $i++){
 
+        if($i < 5){
+            $name = $ranking[$i][0];
+            $points = $ranking[$i][1];
+            ?>
+            <div class="rankingPlayer">
+                <p class="playerinfo">#<?=$i+1?> <?=$name?> - <?=$points?></p>
+            </div>
+            <?php
+        }
+    }
+?>
+
+<br>
     <a class="button" href="form.html">MENU</a>
 </body>
 </html>

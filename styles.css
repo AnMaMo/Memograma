@@ -41,6 +41,10 @@ body{
     text-shadow: 1px 1px 5px var(--black);
 }
 
+.hidden{
+    display: none;
+}
+
 /*#region FORM PAGE CSS Global */
 .allForm{
     max-width: 75%;
@@ -123,6 +127,24 @@ body{
     background-color: var(--color5);
     border-radius: 5px;
 }
+/*#endregion*/
+
+
+/*#region RANKING CSS Global */
+.rankingPlayer{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+background-color: var(--color4);
+width: max-content;
+}
+
+.playerpoints{
+    font-size: 13px;
+}
+
 /*#endregion*/
 
 /*--------------------------------------------------*/

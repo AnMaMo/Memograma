@@ -7,6 +7,7 @@
     <title>PARTY</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/party.js"></script>
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico">
 </head>
 <body id="rick">
 
@@ -16,7 +17,6 @@
         $fy = $_POST['fy'];
         $cardsnumber = $fx * $fy;
         $time = $_POST['ftime'];
-
 
         //Get all players
         $player1 = $_POST['player1'];
@@ -108,6 +108,16 @@
 
         </div>
         <a class="button" href="form.html">QUIT</a>
+
+
+<div class="hidden">
+    <form action="manageCookies.php" id="cookiesform" method="post">
+    <input type="text" name="playername">
+    <input type="text" name="playerpoints">
+    <input type="text" name="playertime">
+    </form>
+</div>
+
 
 </body>
 </html>

@@ -279,33 +279,13 @@ function addPlayerToRanking(playername, points, time) {
         time: time
     };
 
-    // Debug
-    alert("PLAYER= " + player.name + " " + player.points + " " + player.time);
 
-
-    // Get the array
-    var ranking = getCookie("ranking");
-    var rankingArray = JSON.parse(ranking);
-
-
-    // Check if cookie ranking exist
-    if (rankingArray == null) {
-        //Here create a array and a cookie with 1 player inside the array
-        var plArr = new Array();
-        plArr.push(player);
-
-        var cookieArray = JSON.stringify(plArr);
-
-        setCookie('ranking', cookieArray);
-    } else {
-       //Here get the cookie array add a player order it and create a cookie now
-    }
-
-
-
-
-
-    // Open the ranking
+    const form = document.forms['cookiesform'];
+    form[0].value = player.name;
+    form[1].value = player.points;
+    form[2].value = player.time;
+    form.submit();
+    
     //  openRanking();
 }
 
@@ -419,37 +399,4 @@ function restartCountdown() {
 function stopCountdown() {
     clearInterval(timerCountDown);
     document.getElementById("counter").innerText = "";
-}
-
-
-// click the key p and stop the countdown
-document.addEventListener('keydown', function (event) {
-
-    if (event.keyCode == 80) {
-        stopCountdown();
-    }
-}
-);
-
-
-/**
- * Function to create and save a cookie
- * @param {*} name 
- * @param {*} value 
- */
-function setCookie(name, value) {
-    var cookie = [name, '=', value, ', domain=.', window.location.host.toString(), ', path=/;'].join('');
-    document.cookie = cookie;
-}
-
-
-/**
- * Method to read a cookieF
- * @param {*} name 
- * @returns 
- */
-function getCookie(name) {
-    var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
-    result && (result = JSON.parse(result[1]));
-    return result;
 }
