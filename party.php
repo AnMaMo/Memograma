@@ -17,6 +17,7 @@
         $fy = $_POST['fy'];
         $cardsnumber = $fx * $fy;
         $time = $_POST['ftime'];
+        $foolder = $_POST['difficulty'];
 
         //Get all players
         $player1 = $_POST['player1'];
@@ -42,6 +43,7 @@
         // Create a div with info about players
     ?>
         <div class="playersinfo">
+            <h3 id="titleDifficulty"><?=$foolder?></h3>
             <?php
                 // Iterate the players array
                 foreach ($players as $player) {
@@ -93,7 +95,7 @@
             ?>
 
             <div class="card">
-                    <img src="media/cards/reversecard.png" id="card_<?=$CardIdNumber?>" name="<?=$actualCard?>" class="noFlipCard" onclick="flipCard(this.id, this.name)" alt="" >      
+                    <img src="media/cards/<?=$foolder?>/reversecard.png" id="card_<?=$CardIdNumber?>" name="<?=$actualCard?>" class="noFlipCard" onclick="flipCard(this.id, this.name)" alt="" >      
                 </div>
             <?php
             $nActualCardOfArray++;

@@ -7,10 +7,17 @@
     <title>Ranking</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="media/favicon.ico">
+
+    <script>
+        // Audio
+        var finalaudio = new Audio('audio/aplausos.mp3');
+        finalaudio.play();
+    </script>
 </head>
 <body>
 <h1 class="title">RANKING</h1>
 <?php
+
     //Get the cookie ranking decode it and get the array
     $rankingcookie = isset($_COOKIE["ranking"]);
     $ranking = json_decode($_COOKIE["ranking"], true);

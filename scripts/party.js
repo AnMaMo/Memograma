@@ -13,13 +13,14 @@ var players = new Array();
 // Party vars
 var countdownTime = null;
 var isRickRollVar = false;
-
-
+var difficulty = null;
 
 /**
  * This is the principal function of the game
  */
 window.onload = function startParty() {
+
+    difficulty = document.getElementById("titleDifficulty").textContent;
 
     //Set value to contdownTime
     countdownTime = parseInt(document.getElementById("counter").textContent);
@@ -75,15 +76,11 @@ function isRickRoll() {
  */
 function flipCard(id, name) {
 
-    // Audio
-    var audio = new Audio('laser.mp3');
-    audio.play();
-
     var idCardClicked = id;
     var nameCardClicked = name;
 
     // Reverse a card
-    document.getElementById(idCardClicked).src = ("media/cards/" + name + ".png");
+    document.getElementById(idCardClicked).src = ("media/cards/" + difficulty + "/" + name + ".png");
 
     //quitar atributo onclick
     document.getElementById(idCardClicked).removeAttribute("onclick");
@@ -122,8 +119,8 @@ function checkTheCards() {
     // See if twho cards is the same card
     if (flippedcard1Name != flippedcard2Name) {
         // Set the cards to the back
-        document.getElementById(flippedcard1Id).src = ("media/cards/reversecard.png");
-        document.getElementById(flippedcard2Id).src = ("media/cards/reversecard.png");
+        document.getElementById(flippedcard1Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
+        document.getElementById(flippedcard2Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
 
         // Create a array with all cards reversed
         var allCards = document.getElementsByClassName("noFlipCard");
@@ -140,6 +137,10 @@ function checkTheCards() {
         changeTurn(actualPlayerIndex);
 
     } else {
+        // Audio
+        var okaudio = new Audio('audio/ok.mp3');
+        okaudio.play();
+
         // The cards are equals now restart the countdown
         restartCountdown();
 
@@ -259,7 +260,7 @@ function getTheWinner() {
                 var winnerName = WinnerPlayers[0];
                 var pointsWinner = document.getElementById(winnerName + "-points").textContent;
                 var timeWinner = document.getElementById(winnerName + "-time").textContent;
-    
+
                 addPlayerToRanking(winnerName, pointsWinner, timeWinner);
             } else {
                 alert("tie");

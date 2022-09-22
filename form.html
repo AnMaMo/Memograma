@@ -7,6 +7,7 @@
     <title>MEMORY GAME</title>
         <script src="scripts/validateForm.js"></script>
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/x-icon" href="media/favicon.ico">
 </head>
 <body>
     <div class="allForm">
@@ -14,7 +15,6 @@
     <div class="form">
         <!--Init the form in html-->
         <form name="initialform" action="party.php" method="post" onsubmit="return validate();">
-
 
 
             <!--Number of players-->
@@ -43,7 +43,18 @@
                     <input type="range" id="rangeInput" value="5" name="fy" min="2" max="5" oninput="this.nextElementSibling.value = this.value" required>
                     <output for="fy" id="output">5</output>
                 </div>
-        </div>
+            </div>
+
+            <br>
+            <select id="difficulty" name="difficulty">
+                <option id="option" value="planets">planets</option>
+                <option id="option" value="ovnis">ovnis</option>
+              </select>
+              <br>
+
+
+
+
         <!--Submit button-->
             <input class="button" type="submit" value="PLAY">
             <a class="button" href="ranking.php">RANK</a>

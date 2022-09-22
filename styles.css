@@ -80,10 +80,24 @@ body{
     color: var(--black);
     background-color: var(--white);
 }
+
+#difficulty{
+    color:var(--black);
+    letter-spacing: 0.1em;
+    padding: 10px;
+}
+
+#option{
+    color: var(--black);
+}
+
 /*#endregion*/
 
 
 /*#region PARTY CSS Global */
+#titleDifficulty{
+    display: none;
+}
 .playersinfo .playerinfo{
     display: inline-block;
     margin: 5px;
