@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="code.js"></script>
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico">
 </head>
 <body>
 <h1 class="title">RANKING</h1>

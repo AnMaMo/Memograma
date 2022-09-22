@@ -74,6 +74,11 @@ function isRickRoll() {
  * @param {*} name 
  */
 function flipCard(id, name) {
+
+    // Audio
+    var audio = new Audio('laser.mp3');
+    audio.play();
+
     var idCardClicked = id;
     var nameCardClicked = name;
 
@@ -285,7 +290,7 @@ function addPlayerToRanking(playername, points, time) {
     form[1].value = player.points;
     form[2].value = player.time;
     form.submit();
-    
+
     //  openRanking();
 }
 
