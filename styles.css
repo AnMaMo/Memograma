@@ -4,7 +4,7 @@
     --color2: #141852;
     --color3: #6b4984;
     --color4: #855988;
-    --color5: #483475;
+    --color5: #39393a;
     --color6: #b64545;
     --white: #eeeeee;
     --black: #292929;
@@ -134,15 +134,24 @@ body{
 }
 
 .noFlipCard{
+    animation: rotateCard2 1s;
+    background-color: var(--color4);
+}
+
+.noFlipCardClick{
+    animation: rotateCard 1s;
     background-color: var(--color4);
 }
 
 .flipCard{
+    transition: 1s;
+    animation: samecards 0.5s;
     background-color: var(--color5);
-    border-radius: 5px;
-    animation-name: myAnimation;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
+}
+
+.flipCard:hover{
+    transition: 1s;
+    background-color: var(--color6);
 }
 /*#endregion*/
 
@@ -237,14 +246,44 @@ body{
 }
 /*#endregion*/
 
+/*--------------------------------------------------*/
 
-/*Animations*/
-
-@keyframes RotateCard{
+/*Animation samecards*/
+@keyframes samecards{
     0%{
-      transform: rotateY(0deg);
+        transform: scale(1);
+        background-color: var(--color1);
+    }
+    50%{
+        transform: scale(1.1);
+        background-color: var(--color4);
     }
     100%{
-      transform: rotateY(180deg);
+        transform: scale(1);
+        background-color: var(--color5);
     }
-  }
+}
+
+@keyframes rotateCard{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateCard2{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
