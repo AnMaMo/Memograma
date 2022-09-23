@@ -140,6 +140,9 @@ body{
 .flipCard{
     background-color: var(--color5);
     border-radius: 5px;
+    animation-name: myAnimation;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 /*#endregion*/
 
@@ -161,6 +164,9 @@ body{
     font-size: 13px;
 }
 
+#info text{
+    font-size: 15px;
+}
 
 /*#endregion*/
 
@@ -223,8 +229,22 @@ body{
         margin: auto;
         margin-bottom: 10px;
     }
+
+    #info text{
+        font-size: 12px;
+    }
     /*#endregion*/
 }
 /*#endregion*/
 
 
+/*Animations*/
+
+@keyframes RotateCard{
+    0%{
+      transform: rotateY(0deg);
+    }
+    100%{
+      transform: rotateY(180deg);
+    }
+  }

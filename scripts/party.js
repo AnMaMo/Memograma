@@ -316,6 +316,9 @@ function changeTurn(actualPlayerIndex) {
     // Restart the countdown
     restartCountdown();
 
+    // Add 1 to turn
+    document.getElementById("turn").textContent = parseInt(document.getElementById("turn").textContent) + 1;
+
     // Change the color of the actual player to white
     document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
     // Change the actual player
@@ -368,6 +371,9 @@ var timerCountDown;
 function countdownfunction() {
     timerCountDown = setInterval(countdown, 1000);
     function countdown() {
+        // Add a second to partytime
+        document.getElementById("partytime").innerText = parseInt(document.getElementById("partytime").innerText) + 1;
+
         if (players.length != 1) {
             var time = parseInt(document.getElementById("counter").textContent);
             document.getElementById("counter").innerText = parseInt(time) - 1;

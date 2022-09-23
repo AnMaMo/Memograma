@@ -54,7 +54,10 @@
                     echo "</div>";
                 }
             ?>
-                <div id="CountDown"><text>CountDown: </text> <text id="counter"><?=$time?></text></div>            
+            <!-- Party info-->
+            <div id="info"><text>Turn: </text> <text id="turn">0</text></div> 
+            <div id="info"><text>PartyTime: </text> <text id="partytime">0</text></div> 
+            <div id="info"><text>CountDown: </text> <text id="counter"><?=$time?></text></div>          
         </div>
 
         <?php
