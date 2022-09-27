@@ -233,7 +233,7 @@ function getTheWinner() {
 
         // If the array of players with max points is 1 the player win
         if (playersWithMaxPoints.length == 1) {
-            alert("The winner1 is " + playersWithMaxPoints[0]);
+            alert("Winner is " + playersWithMaxPoints[0] + "!");
             var winnerName = playersWithMaxPoints[0];
             var pointsWinner = document.getElementById(winnerName + "-points").textContent;
             var timeWinner = document.getElementById(winnerName + "-time").textContent;
@@ -273,7 +273,7 @@ function getTheWinner() {
 
             // If the array of winner players is 1 the player win
             if (WinnerPlayers.length == 1) {
-                alert("The winner is " + WinnerPlayers[0]);
+                alert("Winner is " + WinnerPlayers[0] + "!");
                 var winnerName = WinnerPlayers[0];
                 var pointsWinner = document.getElementById(winnerName + "-points").textContent;
                 var timeWinner = document.getElementById(winnerName + "-time").textContent;
