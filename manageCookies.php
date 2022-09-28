@@ -45,7 +45,6 @@
 
             // Add the player to the array
             array_push($ranking, $player);
-
             // Order array descending using $ranking[i][1] as key
             array_multisort(array_column($ranking, 1), SORT_DESC, $ranking);
         }
