@@ -1,3 +1,9 @@
+<?php
+    //Get the cookie ranking decode it and get the array
+    $rankingcookie = isset($_COOKIE["ranking"]);
+    $ranking = json_decode($_COOKIE["ranking"], true);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +23,6 @@
 <body>
 <h1 class="title">RANKING</h1>
 <?php
-
-    //Get the cookie ranking decode it and get the array
-    $rankingcookie = isset($_COOKIE["ranking"]);
-    $ranking = json_decode($_COOKIE["ranking"], true);
-
     //Iterate array and echo it info
     for($i = 0; $i < count($ranking); $i++){
 
