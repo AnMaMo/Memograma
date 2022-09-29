@@ -162,10 +162,11 @@ function checkTheCards() {
         restartCountdown();
 
         // Remove a noflipcardClick class with the twho same cards and add a flipcard class
-        document.getElementById(flippedcard1Id).classList.remove('noFlipCardClick');
         document.getElementById(flippedcard1Id).classList.add('flipCard');
-        document.getElementById(flippedcard2Id).classList.remove('noFlipCardClick');
+        document.getElementById(flippedcard1Id).classList.remove('noFlipCardClick');
         document.getElementById(flippedcard2Id).classList.add('flipCard');
+        document.getElementById(flippedcard2Id).classList.remove('noFlipCardClick');
+
 
         // Create a array with all cards reversed
         var allCards = document.getElementsByClassName("noFlipCard");

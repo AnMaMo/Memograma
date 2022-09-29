@@ -109,7 +109,7 @@ body{
 }
 
 .board{
-    width: 35%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -121,16 +121,15 @@ body{
 .row{
     justify-content: center;
     display: flex;
-    max-width: 100%;
+    max-width: 50%;
     flex-direction: row;
+    margin: auto;
 }
 
-.card {
-    max-width: 25%;
-}
 .card img{
-    max-width: 100%;
+    max-width: 70px;
     cursor: pointer;
+    margin: auto;
 }
 
 .noFlipCard{
@@ -198,9 +197,10 @@ body{
         }
         /*#endregion*/
 
-        /*#region Party css*/
-        .board{
-            width: 60%;
+        .card img{
+            max-width: 50px;
+            cursor: pointer;
+            margin: auto;
         }
         /*#endregion*/
 
@@ -231,12 +231,13 @@ body{
     
     /*#region Party css*/
     .board{
-        width: 80%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        width: 100%;
+    }
+
+    .card img{
+        max-width: 40px;
+        cursor: pointer;
         margin: auto;
-        margin-bottom: 10px;
     }
 
     #info text{
