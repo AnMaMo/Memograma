@@ -83,7 +83,7 @@ function flipCard(id, name) {
     // change the class of the card to noFlipCardClick
     document.getElementById(idCardClicked).classList.remove('noFlipCard');
     document.getElementById(idCardClicked).classList.add('noFlipCardClick');
-                
+
     // Reverse a card
     document.getElementById(idCardClicked).src = ("media/cards/" + difficulty + "/" + name + ".png");
 
@@ -99,7 +99,7 @@ function flipCard(id, name) {
         flippedcard1Name = nameCardClicked;
         existFlippedCard = true;
 
-        
+
     } else {
         flippedcard2Id = idCardClicked;
         flippedcard2Name = nameCardClicked;
@@ -394,7 +394,12 @@ function countdownfunction() {
         if (players.length != 1) {
             var time = parseInt(document.getElementById("counter").textContent);
             document.getElementById("counter").innerText = parseInt(time) - 1;
-            if (time < 1) {
+            if (time == 0) {
+
+                if(flippedcard1Id != null){
+                    reverseNullCards();
+                }
+
                 restartCountdown();
 
                 //Discover what element of the array is the actual player
@@ -407,6 +412,25 @@ function countdownfunction() {
     }
 }
 
+
+/**
+ * Function to reverse cards if the turn finish
+ */
+function reverseNullCards() {
+
+    document.getElementById(flippedcard1Id).classList.add("noFlipCard");
+    document.getElementById(flippedcard1Id).classList.remove("noFlipCardClick");
+    document.getElementById(flippedcard1Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
+    document.getElementById(flippedcard1Id).setAttribute("onclick", "flipCard(this.id, this.name)");
+
+
+    // Clear cards variables
+    existFlippedCard = false;
+    flippedcard1Id = null;
+    flippedcard1Name = null;
+    flippedcard2Id = null;
+    flippedcard2Name = null;
+}
 
 
 

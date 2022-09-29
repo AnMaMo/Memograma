@@ -112,7 +112,7 @@
         ?>
 
         </div>
-        <a class="button" href="form.html">QUIT</a>
+        <a class="button" href="index.html">QUIT</a>
 
 
 <div class="hidden">

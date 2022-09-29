@@ -39,6 +39,6 @@
 ?>
 
 <br>
-    <a class="button" href="form.html">MENU</a>
+    <a class="button" href="index.html">MENU</a>
 </body>
 </html>
