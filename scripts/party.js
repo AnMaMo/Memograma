@@ -5,6 +5,18 @@ var flippedcard1Name = null;
 var flippedcard2Id = null;
 var flippedcard2Name = null;
 
+/**
+ * Function to set card values to null
+ */
+function valuesToNull() {
+    existFlippedCard = false;
+    flippedcard1Id = null;
+    flippedcard1Name = null;
+    flippedcard2Id = null;
+    flippedcard2Name = null;
+}
+
+
 // Player vars
 var actualPlayer = null;
 var turnPlayer = null;
@@ -48,26 +60,59 @@ window.onload = function startParty() {
 }
 
 
+////// PLAYER AND TURNS FUNCTIONS /////
 
 /**
- * 
+ * Function to change the turn of the player
+ * @param {*} actualPlayerIndex 
  */
-function isRickRoll() {
-    for (var i = 0; i < players.length; i++) {
-        if (players[i].toUpperCase() == "RICK") {
-            // set background to Rick
-            document.getElementById("rick").style.backgroundImage = "url('media/rickroll-gif.gif')";
-            //set width background to 50px
-            document.getElementById("rick").style.backgroundSize = "100px";
-            document.getElementById("rick").style.backgroundRepeat = "repeat";
+function changeTurn(actualPlayerIndex) {
+    // Restart the countdown
+    restartCountdown();
 
-            // Set variables to play music
-            isRickRollVar = true;
-            alert("Rick Roll Mode activated");
-        }
+    // Add 1 to turn
+    document.getElementById("turn").textContent = parseInt(document.getElementById("turn").textContent) + 1;
+
+    // Change the color of the actual player to white
+    document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
+    // Change the actual player
+    if (actualPlayerIndex == players.length - 1) {
+        turnPlayer = players[0];
+    } else {
+        turnPlayer = players[actualPlayerIndex + 1];
     }
+    // Change the color of the new player to red
+    document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
 }
 
+
+/**
+ * Function to add a point to the player
+ * @param {} player 
+ */
+function addPointToPlayer(player) {
+    // Get the player points
+    var playerpoints = document.getElementById(player + "-points").textContent
+
+    playerpoints = parseInt(playerpoints);
+    playerpoints++;
+
+    document.getElementById(player + "-points").innerText = playerpoints;
+}
+
+/**
+ * Add time to player
+ * @param {*} player 
+ */
+function addTimeToPlayer(player) {
+    playertime = parseInt(document.getElementById(player + "-time").textContent);
+    document.getElementById(player + "-time").innerText = playertime + 1;
+}
+
+////////////////////////////////////////
+
+
+///// CARDS FUNCTIONS /////
 
 /**
  * Function to flip the card needs the id and the name of the card who is flipped
@@ -81,14 +126,12 @@ function flipCard(id, name) {
 
 
     // change the class of the card to noFlipCardClick
+
     document.getElementById(idCardClicked).classList.remove('noFlipCard');
     document.getElementById(idCardClicked).classList.add('noFlipCardClick');
 
     // Reverse a card
     document.getElementById(idCardClicked).src = ("media/cards/" + difficulty + "/" + name + ".png");
-
-
-
 
     // Remove click attribute
     document.getElementById(idCardClicked).removeAttribute("onclick");
@@ -101,6 +144,10 @@ function flipCard(id, name) {
 
 
     } else {
+
+        //Now stop contdown
+        stopCountdown();
+
         flippedcard2Id = idCardClicked;
         flippedcard2Name = nameCardClicked;
 
@@ -113,11 +160,9 @@ function flipCard(id, name) {
         }
 
         // Now check if the cards are equals
-        setTimeout(checkTheCards, 1500);
+        setTimeout(checkTheCards, 1000);
     }
 }
-
-
 
 
 /**
@@ -130,14 +175,16 @@ function checkTheCards() {
     if (flippedcard1Name != flippedcard2Name) {
 
         // change the class of the card to noFlipCard
-        document.getElementById(flippedcard1Id).classList.remove('noFlipCardClick');
         document.getElementById(flippedcard1Id).classList.add('noFlipCard');
-        document.getElementById(flippedcard2Id).classList.remove('noFlipCardClick');
+        document.getElementById(flippedcard1Id).classList.remove('noFlipCardClick');
         document.getElementById(flippedcard2Id).classList.add('noFlipCard');
+        document.getElementById(flippedcard2Id).classList.remove('noFlipCardClick');
+
 
         // Set the cards to the back
         document.getElementById(flippedcard1Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
         document.getElementById(flippedcard2Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
+
 
         // Create a array with all cards reversed
         var allCards = document.getElementsByClassName("noFlipCard");
@@ -147,19 +194,18 @@ function checkTheCards() {
             allCards[i].setAttribute("onclick", "flipCard(this.id, this.name)");
         }
 
-        existFlippedCard = false;
+        // Set card values to null
+        valuesToNull();
+
 
         //Discover what element of the array is the actual player
         var actualPlayerIndex = players.indexOf(turnPlayer);
         changeTurn(actualPlayerIndex);
-
     } else {
         // Audio
         var okaudio = new Audio('audio/ok.mp3');
         okaudio.play();
 
-        // The cards are equals now restart the countdown
-        restartCountdown();
 
         // Remove a noflipcardClick class with the twho same cards and add a flipcard class
         document.getElementById(flippedcard1Id).classList.add('flipCard');
@@ -168,6 +214,10 @@ function checkTheCards() {
         document.getElementById(flippedcard2Id).classList.remove('noFlipCardClick');
 
 
+        // Set card values to null
+        valuesToNull();
+
+
         // Create a array with all cards reversed
         var allCards = document.getElementsByClassName("noFlipCard");
 
@@ -176,15 +226,13 @@ function checkTheCards() {
             allCards[i].setAttribute("onclick", "flipCard(this.id, this.name)");
         }
 
-        // Set all values to null and false
-        existFlippedCard = false;
-        flippedcard1Id = null;
-        flippedcard1Name = null;
-        flippedcard2Id = null;
-        flippedcard2Name = null;
+
 
         // Add a point to the player
         addPointToPlayer(turnPlayer);
+
+        // Start the countdown again
+        restartCountdown();
 
         // Check if player wins
         setTimeout(checkIfPlayerWin, 500);
@@ -192,7 +240,24 @@ function checkTheCards() {
 }
 
 
+/**
+ * Function to reverse cards if the turn finish
+ */
+function reverseNullCards() {
+    document.getElementById(flippedcard1Id).classList.add("noFlipCard");
+    document.getElementById(flippedcard1Id).classList.remove("noFlipCardClick");
+    document.getElementById(flippedcard1Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
+    document.getElementById(flippedcard1Id).setAttribute("onclick", "flipCard(this.id, this.name)");
 
+    // Set card values to null
+    valuesToNull();
+}
+
+////////////////////////////////////////
+
+
+
+///// WIN FUNCTIONS /////
 
 /**
  * Check if the player wins in this turn
@@ -205,8 +270,6 @@ function checkIfPlayerWin() {
         getTheWinner();
     }
 }
-
-
 
 
 /**
@@ -288,6 +351,11 @@ function getTheWinner() {
     }
 }
 
+////////////////////////////////////////
+
+
+
+///// RANKING FUNCTIONS /////
 
 /**
  * Function to add a player to the ranking cookie
@@ -314,8 +382,6 @@ function addPlayerToRanking(playername, points, time) {
 }
 
 
-
-
 /**
  * This function open the ranking page.
  */
@@ -323,64 +389,11 @@ function openRanking() {
     window.location.href = "ranking.php";
 }
 
+////////////////////////////////////////
 
 
 
-/**
- * Function to change the turn of the player
- * @param {*} actualPlayerIndex 
- */
-function changeTurn(actualPlayerIndex) {
-    // Restart the countdown
-    restartCountdown();
-
-    // Add 1 to turn
-    document.getElementById("turn").textContent = parseInt(document.getElementById("turn").textContent) + 1;
-
-    // Change the color of the actual player to white
-    document.getElementById(turnPlayer + "-div").style.backgroundColor = null;
-    // Change the actual player
-    if (actualPlayerIndex == players.length - 1) {
-        turnPlayer = players[0];
-    } else {
-        turnPlayer = players[actualPlayerIndex + 1];
-    }
-    // Change the color of the new player to red
-    document.getElementById(turnPlayer + "-div").style.backgroundColor = "#b64545";
-}
-
-
-
-
-/**
- * Function to add a point to the player
- * @param {} player 
- */
-function addPointToPlayer(player) {
-    // Get the player points
-    var playerpoints = document.getElementById(player + "-points").textContent
-
-    playerpoints = parseInt(playerpoints);
-    playerpoints++;
-
-    document.getElementById(player + "-points").innerText = playerpoints;
-}
-
-
-
-
-/**
- * Add time to player
- * @param {*} player 
- */
-function addTimeToPlayer(player) {
-    playertime = parseInt(document.getElementById(player + "-time").textContent);
-    document.getElementById(player + "-time").innerText = playertime + 1;
-}
-
-
-
-
+///// COUNTDOWN FUNCTIONS /////
 
 /**
  * Contdown infinite function
@@ -395,13 +408,16 @@ function countdownfunction() {
         if (players.length != 1) {
             var time = parseInt(document.getElementById("counter").textContent);
             document.getElementById("counter").innerText = parseInt(time) - 1;
-            if (time == 0) {
 
-                if(flippedcard1Id != null){
+            if (time == 0) {
+                // Now stop the contdown
+                stopCountdown();
+
+
+
+                if (flippedcard1Id != null) {
                     reverseNullCards();
                 }
-
-                restartCountdown();
 
                 //Discover what element of the array is the actual player
                 var actualPlayerIndex = players.indexOf(turnPlayer);
@@ -413,44 +429,44 @@ function countdownfunction() {
     }
 }
 
-
-/**
- * Function to reverse cards if the turn finish
- */
-function reverseNullCards() {
-
-    document.getElementById(flippedcard1Id).classList.add("noFlipCard");
-    document.getElementById(flippedcard1Id).classList.remove("noFlipCardClick");
-    document.getElementById(flippedcard1Id).src = ("media/cards/" + difficulty + "/" + "reversecard.png");
-    document.getElementById(flippedcard1Id).setAttribute("onclick", "flipCard(this.id, this.name)");
-
-
-    // Clear cards variables
-    existFlippedCard = false;
-    flippedcard1Id = null;
-    flippedcard1Name = null;
-    flippedcard2Id = null;
-    flippedcard2Name = null;
-}
-
-
-
 /**
  * function to restart contdown
  */
 function restartCountdown() {
     if (players.length != 1) {
         document.getElementById("counter").innerText = countdownTime;
+        countdownfunction();
     }
 }
-
-
-
 
 /**
  * Function to stop the contdown
  */
 function stopCountdown() {
     clearInterval(timerCountDown);
-    document.getElementById("counter").innerText = "";
+}
+
+////////////////////////////////////////
+
+
+
+////// EASTEREGG /////
+
+/**
+ * 
+ */
+function isRickRoll() {
+    for (var i = 0; i < players.length; i++) {
+        if (players[i].toUpperCase() == "RICK") {
+            // set background to Rick
+            document.getElementById("rick").style.backgroundImage = "url('media/rickroll-gif.gif')";
+            //set width background to 50px
+            document.getElementById("rick").style.backgroundSize = "100px";
+            document.getElementById("rick").style.backgroundRepeat = "repeat";
+
+            // Set variables to play music
+            isRickRollVar = true;
+            alert("Rick Roll Mode activated");
+        }
+    }
 }
