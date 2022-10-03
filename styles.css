@@ -25,7 +25,7 @@
 }
 
 .asda:hover{
-    background-color: red;
+    background-color: var(--color6);
     transform: rotate(15deg);
 }
 

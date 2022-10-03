@@ -1,7 +1,14 @@
 <?php
+
+if(!isset($_COOKIE["ranking"])){
+    $ranking = [];
+}else{
     //Get the cookie ranking decode it and get the array
     $rankingcookie = isset($_COOKIE["ranking"]);
     $ranking = json_decode($_COOKIE["ranking"], true);
+}
+
+
 ?>
 
 <!DOCTYPE html>
